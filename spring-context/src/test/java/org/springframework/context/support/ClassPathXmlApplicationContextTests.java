@@ -33,7 +33,9 @@ import org.springframework.beans.TypeMismatchException;
 import org.springframework.beans.factory.BeanCreationException;
 import org.springframework.beans.factory.BeanFactoryUtils;
 import org.springframework.beans.factory.CannotLoadBeanClassException;
+import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.beans.factory.xml.XmlBeanDefinitionReader;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.MessageSource;
 import org.springframework.core.io.ClassPathResource;
@@ -71,6 +73,15 @@ public class ClassPathXmlApplicationContextTests {
 	private static final String ALIAS_FOR_PARENT_CONTEXT = PATH + "aliasForParent.xml";
 	private static final String TEST_PROPERTIES = "test.properties";
 
+
+
+	@Test
+	public void test1() {
+		ClassPathResource resource = new ClassPathResource("bean.xml"); // <1>
+		DefaultListableBeanFactory factory = new DefaultListableBeanFactory(); // <2>
+		XmlBeanDefinitionReader reader = new XmlBeanDefinitionReader(factory); // <3>
+		reader.loadBeanDefinitions(resource); // <4>
+	}
 
 	@Test
 	public void testSingleConfigLocation() {

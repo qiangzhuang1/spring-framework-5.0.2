@@ -338,7 +338,7 @@ public class XmlBeanDefinitionReader extends AbstractBeanDefinitionReader {
 				if (encodedResource.getEncoding() != null) {
 					inputSource.setEncoding(encodedResource.getEncoding());
 				}
-				//这里是具体的读取过程（在这里开始干活，以后再Spring）
+				//这里是具体的读取过程（核心逻辑部分）
 				return doLoadBeanDefinitions(inputSource, encodedResource.getResource());
 			}
 			finally {
@@ -399,7 +399,7 @@ public class XmlBeanDefinitionReader extends AbstractBeanDefinitionReader {
 		try {
 			//将XML文件转换为DOM对象，解析过程由documentLoader实现
 			Document doc = doLoadDocument(inputSource, resource);
-			//这里是启动对Bean定义解析的详细过程，该解析过程会用到Spring的Bean配置规则
+			//这里是启动对Bean定义解析的详细过程，该解析过程会用到Spring的Bean配置规则（根据方法名称也能看出来注册Bean信息的）
 			return registerBeanDefinitions(doc, resource);
 		}
 		catch (BeanDefinitionStoreException ex) {
